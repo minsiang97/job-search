@@ -39,6 +39,12 @@ export interface CompanyInfo {
   companyName: string;
 }
 
+export interface Description {
+  mainDescription: string;
+  bulletDescription?: string;
+  jobDescription: string;
+}
+
 export interface JobList {
   id: number;
   jobTitle: string;
@@ -46,8 +52,9 @@ export interface JobList {
   minimumSalary?: number;
   category: JobCategory;
   jobType: JobType;
-  description: string;
+  description: Description;
   companyInfo: CompanyInfo;
   jobLocation: JobLocation;
-  //   createdAt: Date;
+  createdAt: string;
+  keywords: string[];
 }

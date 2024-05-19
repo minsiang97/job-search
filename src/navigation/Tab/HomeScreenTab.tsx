@@ -2,7 +2,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import TabBarIcon from '@components/TabBarIcon';
 import Color from '@themes/Color';
 import JobSearchStack from '@navigation/Stack/JobSearchStack';
-import RecommendedJobStack from '@navigation/Stack/RecommendedJobStack';
 import ActivityStack from '@navigation/Stack/ActivityStack';
 import ProfileStack from '@navigation/Stack/ProfileStack';
 
@@ -27,15 +26,6 @@ const HomeScreenTab: React.FC = () => {
           tabBarIcon: props => (
             <TabBarIcon name="magnifying-glass" {...props} />
           ),
-        }}
-      />
-      <Tab.Screen
-        name="RecommendedJobStack"
-        component={RecommendedJobStack}
-        options={{
-          tabBarIcon: props => {
-            return <TabBarIcon name="thumbs-up" {...props} />;
-          },
         }}
       />
       <Tab.Screen

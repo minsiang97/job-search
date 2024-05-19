@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderWidth: 1,
     paddingVertical: 13,
-    borderColor: Color.grey,
+    borderColor: Color.dividerGrey,
   },
   primaryButton: {
     backgroundColor: Color.primaryRed,

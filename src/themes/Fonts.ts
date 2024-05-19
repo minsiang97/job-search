@@ -28,10 +28,13 @@ const style = {
   },
   medium: {
     fontSize: size.medium,
-    fontFamily: 'Poppins Medium',
+    fontFamily: 'Poppins Regular',
   },
   bold: {
     fontFamily: 'Poppins Bold',
+  },
+  semiBold: {
+    fontFamily: 'Poppins SemiBold',
   },
   small: {
     fontSize: size.small,
