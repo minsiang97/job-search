@@ -2,8 +2,9 @@ import Divider from 'components/Divider';
 import Text from 'components/Text';
 import { jobList } from 'data/job';
 import { JobDetailsProps } from 'navigation/Stack/JobSearchStack/types';
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -16,12 +17,35 @@ import { calculateJobPostPeriod, parseCurrencyAmount } from 'utils';
 import Icon from 'react-native-vector-icons/FontAwesome6';
 import RenderHTML from 'react-native-render-html';
 import Button from 'components/Button';
+import { ActivityJobDetailsProps } from 'navigation/Stack/ActivityStack/types';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { saveAppliedJobs } from 'redux/features/job/jobSlice';
 
-const JobDetails: React.FC<JobDetailsProps> = ({ route }) => {
+const JobDetails: React.FC<JobDetailsProps | ActivityJobDetailsProps> = ({
+  route,
+  navigation,
+}) => {
+  const [loading, setLoading] = useState(false);
   const { width } = useWindowDimensions();
+  const dispatch = useAppDispatch();
   const jobDetails = useMemo(() => {
     return jobList.find(job => job.id === route.params.id);
   }, [jobList, route.params.id]);
+
+  const appliedJobs = useAppSelector(state => state.job.appliedJobs);
+
+  const handleApply = () => {
+    setLoading(true);
+    setTimeout(() => {
+      dispatch(saveAppliedJobs(jobDetails));
+      setLoading(false);
+      Alert.alert(
+        'Job Application',
+        `Successfully Applied for ${jobDetails?.jobTitle}`,
+        [{ text: 'OK', onPress: () => navigation.goBack() }],
+      );
+    }, 2000);
+  };
   return (
     <SafeAreaView style={styles.container}>
       {jobDetails ? (
@@ -104,7 +128,20 @@ const JobDetails: React.FC<JobDetailsProps> = ({ route }) => {
             </View>
           </ScrollView>
           <View style={styles.buttonView}>
-            <Button buttonText="Apply" buttonType="primary" />
+            <Button
+              buttonText={
+                appliedJobs.some(job => job.id === jobDetails.id)
+                  ? 'Applied'
+                  : 'Apply'
+              }
+              buttonType={
+                appliedJobs.some(job => job.id === jobDetails.id)
+                  ? 'disabled'
+                  : 'primary'
+              }
+              onPress={handleApply}
+              loading={loading}
+            />
           </View>
         </>
       ) : null}

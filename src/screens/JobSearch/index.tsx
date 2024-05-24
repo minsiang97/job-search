@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  Dimensions,
   FlatList,
   RefreshControl,
   SafeAreaView,
@@ -18,9 +19,16 @@ import { JobSearchProps } from 'navigation/Stack/JobSearchStack/types';
 import Card from 'components/Card';
 import { JobList } from 'screens/JobSearch/types';
 import { calculateJobPostPeriod } from 'utils';
-
+import Icon from 'react-native-vector-icons/FontAwesome6';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { saveOrRemoveJobs } from 'redux/features/job/jobSlice';
+const { width } = Dimensions.get('window');
 const JobSearch: React.FC<JobSearchProps> = ({ navigation }) => {
   const [searchInput, setSearchInput] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const userProfile = useAppSelector(state => state.user);
+  const savedJobs = useAppSelector(state => state.job.savedJobs);
+  const appliedJobs = useAppSelector(state => state.job.appliedJobs);
 
   const handleSearch = () => {
     navigation.navigate('JobSearchResult', { search: searchInput });
@@ -51,11 +59,15 @@ const JobSearch: React.FC<JobSearchProps> = ({ navigation }) => {
     navigation.navigate('RecommendedJobs');
   };
 
+  const handleSaveJob = (job: JobList) => {
+    dispatch(saveOrRemoveJobs(job));
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.view}>
         <View style={styles.searchContainer}>
-          <Text style={Fonts.style.h2}>Hello</Text>
+          <Text style={Fonts.style.h2}>Hello, {userProfile.name}</Text>
           <TextInput
             style={styles.textInput}
             placeholder="Enter keywords"
@@ -87,7 +99,9 @@ const JobSearch: React.FC<JobSearchProps> = ({ navigation }) => {
                   style={styles.card}
                   onPress={() => handleOnClickJob(item)}>
                   <Card>
-                    <Text numberOfLines={2} style={Fonts.style.h4}>
+                    <Text
+                      numberOfLines={2}
+                      style={[Fonts.style.h4, styles.title]}>
                       {item.jobTitle}
                     </Text>
                     <Text style={[Fonts.style.tiny, styles.companyInfo]}>
@@ -102,6 +116,26 @@ const JobSearch: React.FC<JobSearchProps> = ({ navigation }) => {
                         ? `, ${item.jobLocation.area}`
                         : null}
                     </Text>
+                    {appliedJobs.some(job => job.id === item.id) ? (
+                      <View style={styles.icon}>
+                        <Icon
+                          name="circle-check"
+                          size={18}
+                          color={Color.green}
+                        />
+                      </View>
+                    ) : (
+                      <TouchableOpacity
+                        style={styles.icon}
+                        onPress={() => handleSaveJob(item)}>
+                        <Icon
+                          name="bookmark"
+                          size={18}
+                          color={Color.primaryRed}
+                          solid={savedJobs.some(job => job.id === item.id)}
+                        />
+                      </TouchableOpacity>
+                    )}
                   </Card>
                 </TouchableOpacity>
               );
@@ -158,5 +192,13 @@ const styles = StyleSheet.create({
   },
   recommendTitle: {
     color: Color.darkgrey,
+  },
+  icon: {
+    position: 'absolute',
+    right: 10,
+    top: 15,
+  },
+  title: {
+    width: width - 80,
   },
 });

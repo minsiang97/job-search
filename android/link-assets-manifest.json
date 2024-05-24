@@ -72,6 +72,10 @@
     {
       "path": "assets/fonts/Poppins-ThinItalic.ttf",
       "sha1": "fb8fccca21550e71135f92bbaf8a2e8a12c90465"
+    },
+    {
+      "path": "assets/pdf/Ong-Min-Siang-FlowCV-Resume-20240422.pdf",
+      "sha1": "3ffb5cdf3b3505e100023110d83c60d755ea8135"
     }
   ]
 }

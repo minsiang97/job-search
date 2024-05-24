@@ -1,12 +1,13 @@
 import { ButtonProps } from '@components/Button/types';
 import Text from '@components/Text';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import Color from '@themes/Color';
 import Fonts from 'themes/Fonts';
 
 const Button: React.FC<ButtonProps> = props => {
-  const { style, buttonText, buttonType, ...restProps } = props;
+  const { style, buttonText, buttonType, loading, textStyle, ...restProps } =
+    props;
   const textColor =
     buttonType === 'primary'
       ? Color.white
@@ -22,11 +23,21 @@ const Button: React.FC<ButtonProps> = props => {
         buttonType === 'disabled' && styles.disabledButton,
         style,
       ]}
-      disabled={buttonType === 'disabled'}
+      disabled={buttonType === 'disabled' || loading}
       {...restProps}>
-      <Text style={[Fonts.style.h4, styles.text, { color: textColor }]}>
-        {buttonText}
-      </Text>
+      {loading ? (
+        <ActivityIndicator size={22} color={Color.white} />
+      ) : (
+        <Text
+          style={[
+            Fonts.style.h4,
+            styles.text,
+            { color: textColor },
+            textStyle,
+          ]}>
+          {buttonText}
+        </Text>
+      )}
     </TouchableOpacity>
   );
 };

@@ -22,8 +22,10 @@ module.exports = {
           '@components': './src/components',
           '@themes': './src/themes',
           '@data': './src/data',
+          '@redux': './src/redux',
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };

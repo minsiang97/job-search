@@ -4,6 +4,7 @@ import { recommendedJobList } from 'data/job';
 import { RecommendedJobsProps } from 'navigation/Stack/JobSearchStack/types';
 import React from 'react';
 import {
+  Dimensions,
   FlatList,
   SafeAreaView,
   StyleSheet,
@@ -12,15 +13,27 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import RenderHTML from 'react-native-render-html';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { JobList } from 'screens/JobSearch/types';
 import Color from 'themes/Color';
 import Fonts from 'themes/Fonts';
 import { calculateJobPostPeriod } from 'utils';
+import Icon from 'react-native-vector-icons/FontAwesome6';
+import { saveOrRemoveJobs } from 'redux/features/job/jobSlice';
+
+const { width } = Dimensions.get('window');
 
 const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ navigation }) => {
   const { width } = useWindowDimensions();
+  const dispatch = useAppDispatch();
+  const savedJobs = useAppSelector(state => state.job.savedJobs);
+  const appliedJobs = useAppSelector(state => state.job.appliedJobs);
   const handleOnClickJob = (job: JobList) => {
     navigation.navigate('JobDetails', { title: job.jobTitle, id: job.id });
+  };
+
+  const handleSaveJob = (job: JobList) => {
+    dispatch(saveOrRemoveJobs(job));
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -38,7 +51,9 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ navigation }) => {
                 style={styles.card}
                 onPress={() => handleOnClickJob(item)}>
                 <Card>
-                  <Text numberOfLines={2} style={Fonts.style.h4}>
+                  <Text
+                    numberOfLines={2}
+                    style={[Fonts.style.h4, styles.title]}>
                     {item.jobTitle}
                   </Text>
                   <Text style={[Fonts.style.medium, styles.companyInfo]}>
@@ -64,6 +79,22 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ navigation }) => {
                   </Text>
 
                   <Text style={[Fonts.style.tiny, styles.time]}>{period}</Text>
+                  {appliedJobs.some(job => job.id === item.id) ? (
+                    <View style={styles.icon}>
+                      <Icon name="circle-check" size={18} color={Color.green} />
+                    </View>
+                  ) : (
+                    <TouchableOpacity
+                      style={styles.icon}
+                      onPress={() => handleSaveJob(item)}>
+                      <Icon
+                        name="bookmark"
+                        size={18}
+                        color={Color.primaryRed}
+                        solid={savedJobs.some(job => job.id === item.id)}
+                      />
+                    </TouchableOpacity>
+                  )}
                 </Card>
               </TouchableOpacity>
             );
@@ -109,5 +140,13 @@ const styles = StyleSheet.create({
   },
   description: {
     color: Color.darkgrey,
+  },
+  icon: {
+    position: 'absolute',
+    right: 10,
+    top: 15,
+  },
+  title: {
+    width: width - 80,
   },
 });

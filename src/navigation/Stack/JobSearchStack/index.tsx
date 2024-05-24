@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import JobSearch from '@screens/JobSearch';
+import JobSearch from 'screens/JobSearch';
 import Color from '@themes/Color';
 import SearchResult from 'screens/JobSearch/SearchResult';
 import {

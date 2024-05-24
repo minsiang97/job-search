@@ -8,7 +8,8 @@
       "@components/*": ["src/components/*"],
       "@screens/*": ["src/screens/*"],
       "@themes/*": ["src/themes/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@redux/*": ["src/redux/*"]
     }
   }
 }
