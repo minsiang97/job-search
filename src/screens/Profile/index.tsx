@@ -57,10 +57,6 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
   return (
     <>
       <SafeAreaView style={styles.safeAreaView} />
-      <StatusBar
-        backgroundColor={Color.primaryRed}
-        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
-      />
       <View style={styles.view}>
         <View style={styles.upperContainer}>
           <Text style={[Fonts.style.regularSemiBold, styles.name]}>

@@ -250,10 +250,6 @@ const SearchResult: React.FC<JobSearchResultProps> = ({
   return (
     <>
       <SafeAreaView style={styles.safeAreaView}>
-        <StatusBar
-          backgroundColor={Color.primaryRed}
-          barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
-        />
         <View style={styles.container}>
           {renderHeader()}
           <View style={styles.view}>

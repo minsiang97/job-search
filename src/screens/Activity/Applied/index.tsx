@@ -27,10 +27,6 @@ const AppliedJobs: React.FC<MaterialTopTabBarProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <StatusBar
-        backgroundColor={Color.primaryRed}
-        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
-      />
       <View style={styles.safeAreaView}>
         {appliedJobs.length > 0 ? (
           <FlatList

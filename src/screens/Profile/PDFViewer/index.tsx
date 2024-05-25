@@ -18,10 +18,6 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ route }) => {
       : { uri: `bundle-assets://pdf/${route.params.fileName}`, cache: true };
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        backgroundColor={Color.primaryRed}
-        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
-      />
       <Pdf
         source={source}
         onLoadComplete={(numberOfPages, filePath) => {

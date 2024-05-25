@@ -50,10 +50,6 @@ const JobDetails: React.FC<JobDetailsProps | ActivityJobDetailsProps> = ({
   };
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        backgroundColor={Color.primaryRed}
-        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
-      />
       {jobDetails ? (
         <>
           <ScrollView

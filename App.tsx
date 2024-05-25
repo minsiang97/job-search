@@ -8,7 +8,7 @@
 import React, { Fragment } from 'react';
 import Main from './src/navigation/Main';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StatusBar, StyleSheet } from 'react-native';
+import { Platform, StatusBar, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
@@ -22,6 +22,12 @@ function App(): React.JSX.Element {
         <BottomSheetModalProvider>
           <Fragment>
             <SafeAreaView style={styles.safeAreaView}>
+              <StatusBar
+                barStyle={
+                  Platform.OS === 'android' ? 'light-content' : 'default'
+                }
+                backgroundColor={Color.primaryRed}
+              />
               <Main />
             </SafeAreaView>
           </Fragment>
