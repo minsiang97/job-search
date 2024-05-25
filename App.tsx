@@ -8,11 +8,12 @@
 import React, { Fragment } from 'react';
 import Main from './src/navigation/Main';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import Color from 'themes/Color';
 
 function App(): React.JSX.Element {
   return (
@@ -21,6 +22,7 @@ function App(): React.JSX.Element {
         <BottomSheetModalProvider>
           <Fragment>
             <SafeAreaView style={styles.safeAreaView}>
+              <StatusBar backgroundColor={Color.primaryRed} />
               <Main />
             </SafeAreaView>
           </Fragment>
