@@ -6,6 +6,7 @@ import React from 'react';
 import {
   Dimensions,
   FlatList,
+  Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -40,7 +41,7 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={Color.primaryRed}
-        barStyle={'light-content'}
+        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
       />
       <View style={styles.container}>
         <FlatList

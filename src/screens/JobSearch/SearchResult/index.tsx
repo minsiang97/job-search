@@ -7,6 +7,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import {
   Dimensions,
   FlatList,
+  Platform,
   RefreshControl,
   SafeAreaView,
   StatusBar,
@@ -251,7 +252,7 @@ const SearchResult: React.FC<JobSearchResultProps> = ({
       <SafeAreaView style={styles.safeAreaView}>
         <StatusBar
           backgroundColor={Color.primaryRed}
-          barStyle={'light-content'}
+          barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
         />
         <View style={styles.container}>
           {renderHeader()}

@@ -20,7 +20,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ route }) => {
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={Color.primaryRed}
-        barStyle={'light-content'}
+        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
       />
       <Pdf
         source={source}

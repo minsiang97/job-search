@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   FlatList,
+  Platform,
   RefreshControl,
   SafeAreaView,
   StatusBar,
@@ -66,7 +67,10 @@ const JobSearch: React.FC<JobSearchProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
-      <StatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
+      <StatusBar
+        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
+        backgroundColor={Color.white}
+      />
       <View style={styles.view}>
         <View style={styles.searchContainer}>
           <Text style={Fonts.style.h2}>Hello, {userProfile.name}</Text>

@@ -5,6 +5,7 @@ import { JobDetailsProps } from 'navigation/Stack/JobSearchStack/types';
 import React, { useMemo, useState } from 'react';
 import {
   Alert,
+  Platform,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -51,7 +52,7 @@ const JobDetails: React.FC<JobDetailsProps | ActivityJobDetailsProps> = ({
     <SafeAreaView style={styles.container}>
       <StatusBar
         backgroundColor={Color.primaryRed}
-        barStyle={'light-content'}
+        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
       />
       {jobDetails ? (
         <>

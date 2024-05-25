@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import {
   FlatList,
+  Platform,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -58,7 +59,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
       <SafeAreaView style={styles.safeAreaView} />
       <StatusBar
         backgroundColor={Color.primaryRed}
-        barStyle={'light-content'}
+        barStyle={Platform.OS === 'android' ? 'light-content' : 'default'}
       />
       <View style={styles.view}>
         <View style={styles.upperContainer}>
