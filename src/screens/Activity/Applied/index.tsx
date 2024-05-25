@@ -3,6 +3,7 @@ import {
   Dimensions,
   FlatList,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -25,6 +26,10 @@ const AppliedJobs: React.FC<MaterialTopTabBarProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
+      <StatusBar
+        backgroundColor={Color.primaryRed}
+        barStyle={'light-content'}
+      />
       <View style={styles.safeAreaView}>
         {appliedJobs.length > 0 ? (
           <FlatList

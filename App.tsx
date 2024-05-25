@@ -22,7 +22,6 @@ function App(): React.JSX.Element {
         <BottomSheetModalProvider>
           <Fragment>
             <SafeAreaView style={styles.safeAreaView}>
-              <StatusBar backgroundColor={Color.primaryRed} />
               <Main />
             </SafeAreaView>
           </Fragment>

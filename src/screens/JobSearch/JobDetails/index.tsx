@@ -7,6 +7,7 @@ import {
   Alert,
   SafeAreaView,
   ScrollView,
+  StatusBar,
   StyleSheet,
   View,
   useWindowDimensions,
@@ -48,6 +49,10 @@ const JobDetails: React.FC<JobDetailsProps | ActivityJobDetailsProps> = ({
   };
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor={Color.primaryRed}
+        barStyle={'light-content'}
+      />
       {jobDetails ? (
         <>
           <ScrollView

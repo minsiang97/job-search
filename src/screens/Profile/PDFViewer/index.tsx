@@ -6,8 +6,10 @@ import {
   View,
   Platform,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import Pdf from 'react-native-pdf';
+import Color from 'themes/Color';
 
 const PDFViewer: React.FC<PDFViewerProps> = ({ route }) => {
   const source =
@@ -16,6 +18,10 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ route }) => {
       : { uri: `bundle-assets://pdf/${route.params.fileName}`, cache: true };
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor={Color.primaryRed}
+        barStyle={'light-content'}
+      />
       <Pdf
         source={source}
         onLoadComplete={(numberOfPages, filePath) => {

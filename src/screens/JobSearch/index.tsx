@@ -4,6 +4,7 @@ import {
   FlatList,
   RefreshControl,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -65,6 +66,7 @@ const JobSearch: React.FC<JobSearchProps> = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
+      <StatusBar barStyle={'dark-content'} backgroundColor={Color.white} />
       <View style={styles.view}>
         <View style={styles.searchContainer}>
           <Text style={Fonts.style.h2}>Hello, {userProfile.name}</Text>

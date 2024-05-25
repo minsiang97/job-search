@@ -7,6 +7,7 @@ import {
   Dimensions,
   FlatList,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -37,6 +38,10 @@ const RecommendedJobs: React.FC<RecommendedJobsProps> = ({ navigation }) => {
   };
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar
+        backgroundColor={Color.primaryRed}
+        barStyle={'light-content'}
+      />
       <View style={styles.container}>
         <FlatList
           style={styles.flatList}

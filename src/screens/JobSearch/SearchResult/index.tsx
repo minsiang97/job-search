@@ -9,6 +9,7 @@ import {
   FlatList,
   RefreshControl,
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   TouchableOpacity,
   View,
@@ -248,6 +249,10 @@ const SearchResult: React.FC<JobSearchResultProps> = ({
   return (
     <>
       <SafeAreaView style={styles.safeAreaView}>
+        <StatusBar
+          backgroundColor={Color.primaryRed}
+          barStyle={'light-content'}
+        />
         <View style={styles.container}>
           {renderHeader()}
           <View style={styles.view}>
